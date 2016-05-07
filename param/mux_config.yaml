@@ -1,0 +1,37 @@
+subscribers:
+  - name:        "Drive forward"
+    topic:       "input/cruise"
+    timeout:     0.1
+    priority:    0
+    short_desc:  "The default cmd_vel, goes forwards"
+  
+  - name:        "Turn randomly"
+    topic:       "input/turn"
+    timeout:     0.1
+    priority:    1
+    short_desc:  "Turns the robot randomly (uniformly sampled within 15 degrees)"
+
+  - name:        "Avoid"
+    topic:       "input/avoid"
+    timeout:     0.1
+    priority:    2
+    short_desc:  "Turn away from detected obstacles"
+
+  - name:        "Escape"
+    topic:       "input/escape"
+    timeout:     0.1
+    priority:    3
+    short_desc:  "Fixed action pattern to turn away from detected obstacles"
+
+  - name:        "Keyboard operation"
+    topic:       "input/teleop"
+    timeout:     0.1
+    priority:    4
+    short_desc:  "Keyboard movement commands from a human user"
+
+  - name:        "Halt"
+    topic:       "input/halt"
+    timeout:     0.1
+    priority:    5
+    short_desc:  "Halts the robot"
+publisher:       "output/cmd_vel"

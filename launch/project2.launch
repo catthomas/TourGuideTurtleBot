@@ -1,0 +1,30 @@
+<launch>
+	 <!-- Bring up the Turtlebot -->
+	<arg name="serialport" default="$(env TURTLEBOT_SERIAL_PORT)" doc="used by create to configure the port it is connected on [/dev/ttyUSB0, /dev/ttyS0]"/>
+	<include file="$(find cjn_turtlebot)/launch/includes/mobile_base.launch.xml">
+	    <arg name="serialport" value="$(arg serialport)" />
+	</include>
+
+	<!-- Start 3d sensor -->
+	<include file="$(find openni2_launch)/launch/openni2.launch"/>
+  
+	<!-- Convert DepthImage to LaserScan -->
+	<node pkg="nodelet" type="nodelet" name="laserscan_nodelet_manager" args="manager"/>
+  	<node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan"
+        	args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet laserscan_nodelet_manager">
+	    	<param name="output_frame_id" value="/camera_depth_frame"/>
+	    	<remap from="image" to="/camera/depth/image_raw"/>
+	    	<remap from="scan" to="/scan"/>
+  	</node>
+
+	<!-- Publish robot state -->
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    		<param name="publish_frequency" type="double" value="15.0" />
+  	</node>
+
+	<!-- gmapping -->
+	<include file="$(find turtlebot_navigation)/launch/includes/gmapping.launch.xml"/>
+
+	<!-- Launch our navigation code -->
+	<!--<node pkg="cjn_turtlebot" name="navigation" type="navigation"/>-->
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+	<!-- 1. Launch world + Turtlebot -->
+	<include file="$(find cjn_turtlebot)/launch/includes/turtlebot_world.launch.xml"/>
+
+	<!-- 2. Launch AMCL -->
+	<include file="$(find cjn_turtlebot)/launch/includes/amcl.launch.xml"/>
+	
+	<!-- 3. Launch GMapping (Unused for now) -->
+	<!-- <include file="$(find cjn_turtlebot)/launch/includes/gmapping.launch.xml"/> -->
+
+`	<!-- 4. Launch RViz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz"/>
+</launch>

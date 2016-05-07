@@ -1,0 +1,12 @@
+<launch>
+	<!-- 1. Launch Turtlebot -->
+	<include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+  
+	<!-- 2. Launch AMCL -->
+	<include file="$(find turtlebot_navigation)/launch/amcl_demo.launch">
+		<arg name="map_file" value="$(find cjn_turtlebot)/maps/felgar_demo.yaml"/>
+	</include>
+	
+	<!-- 3. Launch GMapping (Unused for now) -->
+	<!--<include file="$(find cjn_turtlebot)/launch/includes/gmapping.launch.xml"/>-->
+</launch>
